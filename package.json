@@ -12,7 +12,7 @@
   "license": "ISC",
   "engines": {
     "node": ">=12",
-    "yarn": "*"
+    "npm": ">=8"
   },
   "dependencies": {
     "body-parser": "^1.20.0",
