@@ -3,13 +3,12 @@ const cors = require("cors");
 const ytdl = require("ytdl-core");
 const _ = require('lodash');
 
-const PORT = 9090;
 const app = express();
 
 app.use(cors());
 
-app.listen(PORT, () => {
-  console.log("Server running at http://localhost:", PORT);
+app.listen(3000, () => {
+  console.log("Server running at http://localhost:3000");
 });
 
 app.get("/mp3", async (req, res) => {
