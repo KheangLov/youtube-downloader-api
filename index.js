@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const yt = require("youtube-search-without-api-key");
 const ytdl = require("ytdl-core");
 const _ = require('lodash');
 
@@ -7,8 +8,12 @@ const app = express();
 
 app.use(cors());
 
-app.listen(3000, "0.0.0.0", () => {
-  console.log("Server running at http://localhost:3000");
+app.listen(3000, () => console.log("Server running at http://localhost:3000"));
+
+app.get('/list', async (req, res) => {
+  const { search } = req.query;
+  const videos = await yt.search(search);
+  res.json({ videos });
 });
 
 app.get("/mp3", async (req, res) => {
@@ -29,7 +34,9 @@ app.get("/mp3", async (req, res) => {
       title = info.videoDetails.title;
     }
 
-    res.header("Content-Disposition", `attachment; filename="${title}.mp3"`);
+    title = encodeURIComponent(`${title}.mp3`);
+
+    res.header("Content-Disposition", `attachment; filename="${title}"`);
     ytdl(url, {
       format: "mp3",
       filter: "audioonly",
@@ -44,9 +51,8 @@ app.get("/mp3", async (req, res) => {
 });
 
 app.get("/mp4", async (req, res) => {
-  log("Url: ", req.query.url);
   try {
-    let url = req.query.url;
+    const { url } = req.query;
     if (!ytdl.validateURL(url)) {
       return res.status(400).send({
         status: "failed",
@@ -54,23 +60,22 @@ app.get("/mp4", async (req, res) => {
       });
     }
 
-    let title = "video";
+    let title = "audio";
 
-    await ytdl.getBasicInfo(
-      url,
-      {
-        format: "mp4",
-      },
-      (_, info) => {
-        title = info.player_response.videoDetails.title.replace(
-          /[^\x00-\x7F]/g,
-          ""
-        );
-      }
-    );
+    const info = await ytdl.getInfo(url);
+    if (!_.isEmpty(info)) {
+      title = info.videoDetails.title;
+    }
+
+    title = encodeURIComponent(`${title}.mp3`);
 
     res.header("Content-Disposition", `attachment; filename="${title}.mp4"`);
-    ytdl(url, { format: "mp4" }).pipe(res);
+    res.header("Content-Type", "video/mp4");
+    ytdl(url, {
+      format: "mp4",
+      filter: 'audioandvideo',
+      quality: 'highest' 
+    }).pipe(res);
   } catch (err) {
     console.error(err);
     res.status(500).send({
