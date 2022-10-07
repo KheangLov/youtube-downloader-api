@@ -1,5 +1,5 @@
 services:
-  fastapi:
+  youtube-downloader-api:
     public: true
     image: DOCKERHUBUSERNAME/youtube-downloader-api:latest
     build: .
