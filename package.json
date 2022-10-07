@@ -10,10 +10,6 @@
   },
   "author": "kheang",
   "license": "ISC",
-  "engines": {
-    "node": ">=12",
-    "npm": ">=8"
-  },
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
