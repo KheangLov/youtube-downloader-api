@@ -1,7 +1,7 @@
 FROM node:14-slim
 
 ADD package.json .
-ADD okteto-stack.yaml /okteto-stack.yaml
+ADD okteto-stack.yaml .
 RUN npm install
 
 EXPOSE 3000
