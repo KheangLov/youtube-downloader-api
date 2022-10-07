@@ -8,4 +8,4 @@ services:
       - 8080
     resources:
       cpu: 1000m
-      memory: 3072Mi
+      memory: 2048Mi
