@@ -1,0 +1,11 @@
+services:
+  fastapi:
+    public: true
+    image: DOCKERHUBUSERNAME/youtube-downloader-api:latest
+    build: .
+    replicas: 1
+    ports:
+      - 8080
+    resources:
+      cpu: 1000m
+      memory: 3072Mi

@@ -1,6 +1,11 @@
-build:
-  hello-world:
-    image: okteto.dev/node-hello-world:1.0.0
-    context: .
-deploy:
-  - kubectl apply -f k8s.yml
+name: property-listing
+image: okteto/node:14
+command: bash
+sync:
+- .:/usr/src/app
+forward:
+- 8080:8080
+reverse:
+- 9000:9000
+volumes:
+- /root/.cache
