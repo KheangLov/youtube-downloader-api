@@ -7,7 +7,8 @@ const _ = require('lodash');
 const app = express();
 
 app.use(cors({
-  origin: 'https://yt-downloader-kh.vercel.app'
+  origin: 'https://yt-downloader-kh.vercel.app',
+  credentials: true
 }));
 
 app.listen(3000, () => console.log("Server running at http://localhost:3000"));
@@ -38,6 +39,15 @@ app.get("/mp3", async (req, res) => {
 
     title = encodeURIComponent(`${title}.mp3`);
 
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     res.header("Content-Disposition", `attachment; filename=${title}`);    
     ytdl(url, {
@@ -72,6 +82,15 @@ app.get("/mp4", async (req, res) => {
 
     title = encodeURIComponent(`${title}.mp3`);
 
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     res.header("Content-Disposition", `attachment; filename=${title}.mp4`);
     const video = ytdl(url, {
