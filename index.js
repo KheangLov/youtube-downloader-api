@@ -8,7 +8,7 @@ const app = express();
 
 app.use(cors());
 
-app.listen(3000, '0.0.0.0', () => console.log("Server running at http://localhost:3000"));
+app.listen(3000, () => console.log("Server running at http://localhost:3000"));
 
 app.get('/list', async (req, res) => {
   const { search } = req.query;
@@ -36,7 +36,8 @@ app.get("/mp3", async (req, res) => {
 
     title = encodeURIComponent(`${title}.mp3`);
 
-    res.header("Content-Disposition", `attachment; filename="${title}"`);
+    res.header('Access-Control-Expose-Headers', 'Content-Disposition');
+    res.header("Content-Disposition", `attachment; filename=${title}`);    
     ytdl(url, {
       format: "mp3",
       filter: "audioonly",
@@ -69,8 +70,8 @@ app.get("/mp4", async (req, res) => {
 
     title = encodeURIComponent(`${title}.mp3`);
 
-    res.header("Content-Disposition", `attachment; filename="${title}.mp4"`);
-    // res.header("Content-Type", "video/mp4");
+    res.header('Access-Control-Expose-Headers', 'Content-Disposition');
+    res.header("Content-Disposition", `attachment; filename=${title}.mp4`);
     const video = ytdl(url, {
       format: "mp4",
       filter: 'audioandvideo',
