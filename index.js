@@ -6,7 +6,9 @@ const _ = require('lodash');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://yt-downloader-kh.vercel.app'
+}));
 
 app.listen(3000, () => console.log("Server running at http://localhost:3000"));
 
