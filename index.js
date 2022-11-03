@@ -7,7 +7,7 @@ const _ = require('lodash');
 const app = express();
 
 app.use(cors({
-  origin: 'https://yt-downloader-kh.vercel.app',
+  origin: ['http://localhost:4200', 'https://yt-downloader-kh.vercel.app'],
   credentials: true
 }));
 
