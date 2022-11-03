@@ -8,7 +8,6 @@ const app = express();
 
 app.use(cors({
   origin: ['http://localhost:4200', 'https://yt-downloader-kh.vercel.app'],
-  credentials: true
 }));
 
 app.listen(3000, () => console.log("Server running at http://localhost:3000"));
