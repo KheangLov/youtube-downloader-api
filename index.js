@@ -50,6 +50,7 @@ app.get("/mp3", async (req, res) => {
     ytdl(url, {
       format: "mp3",
       filter: "audioonly",
+      dlChunkSize: 5000000
     }).pipe(res);
   } catch (err) {
     console.error(err);
@@ -93,7 +94,8 @@ app.get("/mp4", async (req, res) => {
     const video = ytdl(url, {
       format: "mp4",
       filter: 'audioandvideo',
-      quality: 'highest' 
+      quality: 'highest',
+      dlChunkSize: 5000000
     });
     video.pipe(res)
   } catch (err) {
