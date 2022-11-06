@@ -36,7 +36,7 @@ app.get("/mp3", async (req, res) => {
 
     title = encodeURIComponent(`${title}.mp3`);
 
-    res.setHeader('Access-Control-Allow-Credentials', true)
+    // res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
     // another common pattern
     // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
@@ -80,7 +80,7 @@ app.get("/mp4", async (req, res) => {
 
     title = encodeURIComponent(`${title}.mp3`);
 
-    res.setHeader('Access-Control-Allow-Credentials', true)
+    // res.setHeader('Access-Control-Allow-Credentials', true)
     res.setHeader('Access-Control-Allow-Origin', '*')
     // another common pattern
     // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
