@@ -6,19 +6,7 @@ const _ = require('lodash');
 
 const app = express();
 
-app.use(cors({
-  origin: true, // "true" will copy the domain of the request back
-                // to the reply. If you need more control than this
-                // use a function.
-
-  credentials: true, // This MUST be "true" if your endpoint is
-                     // authenticated via either a session cookie
-                     // or Authorization header. Otherwise the
-                     // browser will block the response.
-
-  methods: 'POST,GET,PUT,OPTIONS,DELETE' // Make sure you're not blocking
-                                         // pre-flight OPTIONS requests
-}));
+app.use(cors());
 
 app.listen(3000);
 
@@ -55,7 +43,7 @@ app.get("/mp3", async (req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
     res.setHeader(
       'Access-Control-Allow-Headers',
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+      'Origin', 'Authorization', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     )
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     res.header("Content-Disposition", `attachment; filename=${title}`);    
@@ -98,7 +86,7 @@ app.get("/mp4", async (req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
     res.setHeader(
       'Access-Control-Allow-Headers',
-      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+      'Origin', 'Authorization', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     )
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     res.header("Content-Disposition", `attachment; filename=${title}.mp4`);
