@@ -5,6 +5,7 @@ const ytdl = require("ytdl-core");
 const _ = require('lodash');
 
 const app = express();
+const youtubeUrl = "https://www.youtube.com/watch";
 
 app.use(cors());
 
@@ -18,7 +19,8 @@ app.get('/list', async (req, res) => {
 
 app.get("/mp3", async (req, res) => {
   try {
-    const { url } = req.query;
+    const { videoId } = req.query;
+    const url = `${youtubeUrl}?v=${videoId}`;
 
     if (!ytdl.validateURL(url)) {
       return res.status(400).send({
@@ -43,7 +45,7 @@ app.get("/mp3", async (req, res) => {
     res.header('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
     res.header(
       'Access-Control-Allow-Headers',
-      'Origin', 'Authorization', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+      'Origin, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     )
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     res.header("Content-Disposition", `attachment; filename=${title}`);    
@@ -63,7 +65,9 @@ app.get("/mp3", async (req, res) => {
 
 app.get("/mp4", async (req, res) => {
   try {
-    const { url } = req.query;
+    const { videoId } = req.query;
+    const url = `${youtubeUrl}?v=${videoId}`;
+
     if (!ytdl.validateURL(url)) {
       return res.status(400).send({
         status: "failed",
@@ -87,7 +91,7 @@ app.get("/mp4", async (req, res) => {
     res.header('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
     res.header(
       'Access-Control-Allow-Headers',
-      'Origin', 'Authorization', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+      'Origin, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     )
     res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     res.header("Content-Disposition", `attachment; filename=${title}.mp4`);
