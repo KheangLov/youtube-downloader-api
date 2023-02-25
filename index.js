@@ -1,5 +1,5 @@
 const express = require("express");
-// const expressSanitizer = require("express-sanitizer");
+const expressSanitizer = require("express-sanitizer");
 const cors = require("cors");
 const yt = require("youtube-search-without-api-key");
 const ytdl = require("ytdl-core");
@@ -17,12 +17,14 @@ const youtubeUrl = "https://www.youtube.com/watch";
 // };
 
 app.use(cors());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
-// // Mount express-sanitizer middleware here
-// app.use(expressSanitizer());
-
-// app.listen(3434, '0.0.0.0');
+// Mount express-sanitizer middleware here
+app.use(expressSanitizer());
+const PORT = process.env.PORT || 3030;
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
+});
 
 // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
