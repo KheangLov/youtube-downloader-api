@@ -1,5 +1,5 @@
 const express = require("express");
-const expressSanitizer = require("express-sanitizer");
+// const expressSanitizer = require("express-sanitizer");
 const cors = require("cors");
 const yt = require("youtube-search-without-api-key");
 const ytdl = require("ytdl-core");
