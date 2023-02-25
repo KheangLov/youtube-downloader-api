@@ -1,19 +1,39 @@
 const express = require("express");
+// const expressSanitizer = require("express-sanitizer");
 const cors = require("cors");
 const yt = require("youtube-search-without-api-key");
 const ytdl = require("ytdl-core");
 const _ = require('lodash');
+// const https = require("https");
+// const fs = require("fs");
 
 const app = express();
 const youtubeUrl = "https://www.youtube.com/watch";
 
-app.use(cors());
+// const options = {
+//   key: fs.readFileSync("./config/cert.key"),
+//   cert: fs.readFileSync("./config/cert.crt"),
+//   ca: fs.readFileSync("./config/ca.key"),
+// };
 
-app.listen(3000);
+app.use(cors());
+// app.use(express.urlencoded({ extended: true }));
+
+// // Mount express-sanitizer middleware here
+// app.use(expressSanitizer());
+
+// app.listen(3434, '0.0.0.0');
+
+// process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+// https.createServer(options, app).listen(3535, () => {
+//   console.log(`HTTPS server started on port 3535`);
+// });
 
 app.get('/list', async (req, res) => {
   const { search } = req.query;
   const videos = await yt.search(search);
+  console.log({ videos });
   res.json({ videos });
 });
 
