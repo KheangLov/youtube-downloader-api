@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Mount express-sanitizer middleware here
-app.use(expressSanitizer());
+// app.use(expressSanitizer());
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
